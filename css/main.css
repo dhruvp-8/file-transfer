@@ -36,3 +36,60 @@ border-top: 0.7em solid rgba(0, 0, 0 , 0.2);
     transform: rotate(360deg);
   }
 }
+
+.github{
+  position: absolute;
+  left: 33%; 
+  bottom: 10%;
+  opacity: 0.3;
+}
+
+.github:hover{
+  opacity: 0.8;
+}
+
+.webrtc{
+  position: absolute;
+  left: 57%;
+  bottom: 10%;
+  opacity: 0.3;
+}
+.copyright{
+  position: absolute;
+   left: 39%; 
+   bottom: 8%;
+}
+
+.webrtc:hover{
+  opacity: 0.8;
+}
+
+.peer{
+  position: absolute;
+  left: 35%;
+  bottom: 9%;
+  width: 40px;
+  height: 40px;
+  opacity: 0.3;
+}
+
+.peer:hover{
+  opacity: 0.8;
+}
+
+@media only screen and (max-width: 750px ){
+    .github{
+      position: absolute;
+      left: 28%;
+    }
+    .copyright{
+      position: absolute;
+      left: 25%;
+      bottom: 1%;
+    }
+    .webrtc{
+      position:absolute;
+      left: 45%;
+      width: auto;
+    }
+}
