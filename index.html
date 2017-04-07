@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>P2P File Transfer</title>
+        <link rel="stylesheet" href="/file-transfer/css/bootstrap.css">
+        <link rel="stylesheet" href="/file-transfer/css/main.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <script src="/file-transfer/js/peer.js"></script>
+    <script src="/file-transfer/js/jquery.min.js"></script>
+    <script src="/file-transfer/js/concate.js"></script>
+    <script src="/file-transfer/js/index.js" charset="utf-8"></script>
+    <body>
+        <div class="container">
+            <h2 class="text-center">P2P File Transfer</h2>
+            <hr>
+        </div>
+        <div class="container">
+            <div class="col-md-6">
+                <label>Your ID:</label>
+                <input type="text" id="url-link" class="form-control" readonly><br>
+            </div>
+            <div class="col-md-6">
+                <label for="">Receiver's ID</label>
+                <input type="text" id="r-url-d" class="form-control"><br>
+            </div>
+
+            <button type="button" id="connect" onclick="Connect();" class="btn btn-block btn-md btn-primary">Connect</button><br>
+            <label id="cur-conn"></label><br>
+
+            <div class="col-md-6">
+            <input type="file" id="myFile" class="form-control" multiple>
+            </div>
+            <div class="col-md-6">
+                <button type="button" id="send" onclick="SendMsg();" class="btn btn-md btn-success">Send</button><br>
+            </div><br><br><br>
+            <div id="progress1"></div><br>
+            <div id="myLoader" hidden="true">
+                <div class="loader"></div>&nbsp;<span><h4><strong>Please Wait Until your file is being received from host...</strong></h4></span><br>
+            </div>
+            <div id="info"></div>
+            <br><br>
+            <div id="dwld-link"></div>
+        </div>
+
+        </div>
+
+    </body>
+</html>
