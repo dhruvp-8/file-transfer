@@ -12,41 +12,51 @@
     <script src="./js/peer.js"></script>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/concate.js"></script>
-    <script src="./js/index.js" charset="utf-8"></script>
+
     <body>
         <div class="container">
             <h2 class="text-center">P2P File Transfer</h2>
             <hr>
         </div>
-        <div class="container">
-            <div class="col-md-6">
-                <label>Your ID:</label>
-                <input type="text" id="url-link" class="form-control" readonly><br>
-            </div>
-            <div class="col-md-6">
-                <label for="">Receiver's ID</label>
-                <input type="text" id="r-url-d" class="form-control"><br>
+        <div id="test">
+            <div class="container">
+                <div class="col-md-6">
+                    <label>Your ID:</label>
+                    <input type="text" id="url-link" class="form-control" readonly><br>
+                </div>
+                <div class="col-md-6">
+                    <label for="">Receiver's ID</label>
+                    <input type="text" id="r-url-d" class="form-control"><br>
+                </div>
+
+                <button type="button" id="connect" onclick="Connect();" class="btn btn-block btn-md btn-primary">Connect</button><br>
+                <label id="cur-conn"></label><br>
+
+                <div class="col-md-6">
+                <input type="file" id="myFile" class="form-control" multiple>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" id="send" onclick="SendMsg();" class="btn btn-md btn-success">Send</button><br>
+                </div><br><br><br>
+                <div id="progress1"></div><br>
+                <div id="myLoader" hidden="true">
+                    <div class="loader"></div>&nbsp;<span><h4><strong>Please Wait Until your file is being received from host...</strong></h4></span><br>
+                </div>
+                <div id="info"></div>
+                <br><br>
+                <div id="dwld-link"></div>
             </div>
 
-            <button type="button" id="connect" onclick="Connect();" class="btn btn-block btn-md btn-primary">Connect</button><br>
-            <label id="cur-conn"></label><br>
-
-            <div class="col-md-6">
-            <input type="file" id="myFile" class="form-control" multiple>
             </div>
-            <div class="col-md-6">
-                <button type="button" id="send" onclick="SendMsg();" class="btn btn-md btn-success">Send</button><br>
-            </div><br><br><br>
-            <div id="progress1"></div><br>
-            <div id="myLoader" hidden="true">
-                <div class="loader"></div>&nbsp;<span><h4><strong>Please Wait Until your file is being received from host...</strong></h4></span><br>
-            </div>
-            <div id="info"></div>
-            <br><br>
-            <div id="dwld-link"></div>
         </div>
 
+        <div id="error-page" hidden>
+            <img src="./images/sign-error-icon.png" style="position:absolute; left:25%; width:50%;">
+            <div class="container" style="position:absolute; top:53%;">
+                <h5 class="text-danger"><i class="fa fa-exclamation-triangle"></i>WEBRTC not supported in this browser!</h5>
+                <h6><i class="fa fa-exclamation-triangle"></i>&nbsp;Please try <strong>Chrome ( v38+ )</strong> or <strong>Mozilla Firefox ( v31+ )</strong> for better experience!</h6>
+            </div>
         </div>
-
+        <script src="./js/index.js" charset="utf-8"></script>
     </body>
 </html>
