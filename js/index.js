@@ -1,5 +1,8 @@
 var peer = new Peer({
-	key: 'saxv2cjyzuz69a4i'
+	key: 'saxv2cjyzuz69a4i',
+	config: {'iceServers': [
+    { url: 'stun:stun.l.google.com:19302' }
+	]}
 });
 
 var my_id;
@@ -122,7 +125,7 @@ function SendMsg(){
 				if(yy > 100){
 					yy = 100.00;
 				}
-				document.getElementById('progress1').innerHTML = '<div class="progress"><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:'+ yy +'%"></div></div><span><h3><strong>'+ yy +'% completed at a speed of 64kbps!</strong></h3></span>';
+				document.getElementById('progress1').innerHTML = '<div class="progress"><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:'+ yy +'%"></div></div><span><h3><strong>'+ yy +'% completed at a speed of 1Mbps!</strong></h3></span>';
 				console.log("sending: " + (offset / fileSize) * 100 + "%");
 				if (offset >= fileSize) {
 					conn.send(evt.target.result); ///final chunk
