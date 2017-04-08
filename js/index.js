@@ -11,7 +11,7 @@ var other_id;
 if(util.supports.data){
 	peer.on('open', function(id) {
 		my_id = id;
-	console.log('My peer ID is: ' + id);
+	//console.log('My peer ID is: ' + id);
 	document.getElementById('url-link').value = id;
 	});
 
@@ -63,7 +63,7 @@ function SendMsg(){
 					if (offset >= fileSize) {
 						conn.send(evt.target.result); ///final chunk
 						//conn.send('Done!');
-						console.log("Done reading file " + name + " " + mime);
+						//console.log("Done reading file " + name + " " + mime);
 						count++;
 						return;
 					}
@@ -171,7 +171,7 @@ function Connect(){
 				ConcatenateBlobs(finalBlobs, ty , function(resultingBuff){
 
 					var resultingBlob = new Blob([resultingBuff], {type: ty});
-					console.log(resultingBlob);
+					//console.log(resultingBlob);
 					var url  = URL.createObjectURL(resultingBlob);
 					document.getElementById('myLoader').hidden = true;
 					document.getElementById('dwld-link').innerHTML = '<a href="'+ url +'" class="btn btn-md btn-danger" download="'+ nm +'">Download</a>';
