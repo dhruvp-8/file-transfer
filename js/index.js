@@ -3,7 +3,7 @@ var peer = new Peer({
 });
 
 var my_id;
-console.log(navigator.userAgent);
+//console.log(navigator.userAgent);
 var conn;
 var other_id;
 
@@ -59,7 +59,7 @@ function SendMsg(){
 						yy = 100.00;
 					}
 					document.getElementById('progress1').innerHTML = '<div class="progress"><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:'+ yy +'%"></div></div><span><h3><strong>'+ yy +'% completed at a speed of 1Mbps!</strong></h3></span>';
-					console.log("sending: " + (offset / fileSize) * 100 + "%");
+					//console.log("sending: " + (offset / fileSize) * 100 + "%");
 					if (offset >= fileSize) {
 						conn.send(evt.target.result); ///final chunk
 						//conn.send('Done!');
@@ -73,7 +73,7 @@ function SendMsg(){
 						count++;
 					}               
 				} else {
-					console.log("Read error: " + evt.target.error);
+					//console.log("Read error: " + evt.target.error);
 					return; 
 				}
 				readchunk();
@@ -143,14 +143,14 @@ function Connect(){
 				nm = myType[0].name;
 				sz = parseInt(myType[0].size);
 				total = Math.ceil(sz/(1024*1024));
-				console.log(total);
+				//console.log(total);
 				it++;
 			}
 			else{
 				myData.push(data);
 			}
 			//myData.push(data);
-			console.log(myData);
+			//console.log(myData);
 			if(myData.length >= total){
 				var nblob;
 
@@ -167,7 +167,7 @@ function Connect(){
 					}
 				}
 				finalBlobs.push(myBl[0]);
-				console.log(finalBlobs);
+				//console.log(finalBlobs);
 				ConcatenateBlobs(finalBlobs, ty , function(resultingBuff){
 
 					var resultingBlob = new Blob([resultingBuff], {type: ty});
