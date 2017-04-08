@@ -1,5 +1,8 @@
 var peer = new Peer({
-	key: 'saxv2cjyzuz69a4i'
+	key: 'saxv2cjyzuz69a4i',
+	 config: {'iceServers': [
+    { url: 'stun:stun.l.google.com:19302' }
+	 ]}
 });
 
 var my_id;
