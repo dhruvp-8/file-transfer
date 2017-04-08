@@ -86,42 +86,6 @@ function SendMsg(){
 
 		readchunk(Math.ceil(fileSize/chunkSize));
 		conn.send({name:name, type:mime, size: file.size});
-
-
-		/*var chunkSize = 1024*1024;
-		var fileSize = file.size;
-		var chunks = Math.ceil(file.size/chunkSize,chunkSize);
-		var chunk = 0;
-		console.log('file size..',fileSize);
-		console.log('chunks...',chunks);*/
-
-	//while (chunk <= chunks) {
-		//var offset = chunk*chunkSize;
-		/*console.log('current chunk..', chunk);
-		console.log('offset...', chunk*chunkSize);
-		console.log('file blob from offset...', offset);
-		console.log(file.slice(offset,offset + chunkSize));*/
-		//var tp = file.slice(offset,offset + chunkSize);
-		//tp.type = file.type;
-		//console.log(tp);
-		//var blob = new Blob(file[chunk], { type: file.type });
-		//console.log(blob);
-		//chunk++;
-	//}
-
-		/*var blob = new Blob(files, { type: file.type });
-		console.log(blob);
-
-		conn.send({
-			file: blob,
-			filename: file.name,
-			filetype: file.type
-		});*/
-
-		//console.log('dhiasgd');
-		//var msg = $('#content').val();
-		//console.log('Sent By : ['+ my_id +']' + msg);
-		//conn.send('['+ my_id +']' + ' : '+  msg);
 	}
 	
 function Connect(){
@@ -139,6 +103,8 @@ function Connect(){
 		conn = con;
 		$('#cur-conn').append('<strong>Connected to : </strong>' + conn.peer);
 		conn.on('data', function(data){
+			document.getElementById('dwld-link').innerHTML = '';
+			document.getElementById('info').innerHTML = '';
 			document.getElementById('myLoader').hidden = false;
 			if(it < 1){
 				myType.push(data);
@@ -178,24 +144,49 @@ function Connect(){
 					var url  = URL.createObjectURL(resultingBlob);
 					document.getElementById('myLoader').hidden = true;
 					document.getElementById('dwld-link').innerHTML = '<a href="'+ url +'" class="btn btn-md btn-danger" download="'+ nm +'">Download</a>';
-				});
-				
-				//var url  = URL.createObjectURL(nblob);
-				//document.getElementById('dwld-link').innerHTML = '<a href="'+ url +'" class="btn btn-md btn-danger" download>Download</a>';
+					myBl.length = 0;
+					finalBlobs.length = 0;
+					myData.length = 0;
+					myType.length = 0;
+					it = 0;
+				});	
 			}
-			//var filename = myData[0].name;
-			//var filetype = myData[0].type;
-			//var nblob = new Blob([myData[]])
-			//console.log(filename,filetype);
-			/*document.getElementById('info').innerHTML = '<i class="fa fa-file fa-3x"></i>&nbsp;&nbsp;<strong><i><u>' + data.filename +'</u></i></strong>';
-			var nblob = new Blob([data.file], { type: data.filetype });
-			var url  = URL.createObjectURL(nblob);
-			document.getElementById('dwld-link').innerHTML = '<a href="'+ url +'" class="btn btn-md btn-danger" download>Download</a>';
-			console.log(url);*/
 		});
-		//SendMsg(conn);
 
 	}
+
+/*var m = 0;
+var mybb = [];	
+function myConnection(con){
+		conn = con;
+		$('#cur-conn').append('<strong>Connected to : </strong>' + conn.peer);
+		conn.on('data', function(data){
+			if(it < 1){
+				myType.push(data);
+				ty = myType[0].type;
+				nm = myType[0].name;
+				sz = parseInt(myType[0].size);
+				total = Math.ceil(sz/(1024*1024));
+				it++;
+			}
+			else{
+				myData.push(data);
+				var bb = new Blob([myData[m]], {type: ty});
+				mybb.push(bb);
+				ConcatenateBlobs(mybb, ty , function(resultingBuff){
+
+					var resultingBlob = new Blob([resultingBuff], {type: ty});
+					var url  = URL.createObjectURL(resultingBlob);
+					document.getElementById('audio-listen').innerHTML = '<audio src="'+ url +'" id="try"></audio>';
+					document.getElementById('try').type = ty;
+					var t = document.getElementById('try');
+					t.play();
+				});
+				m++;
+			}
+		});
+
+}*/
 
 	function SendEmail(){
 		var email = document.getElementById('email').value;
