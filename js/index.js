@@ -196,3 +196,25 @@ function Connect(){
 		//SendMsg(conn);
 
 	}
+
+	function SendEmail(){
+		var email = document.getElementById('email').value;
+		if(!email){
+			document.getElementById('errorMsg').hidden = false;
+			document.getElementById('successMsg').hidden = true;
+		}
+		else{
+			document.getElementById('errorMsg').hidden = true;
+			var service_id = 'gmail';
+			var template_id = 'template_zS6xa2Hp';
+			var template_params = {
+			from_name: 'File Transfer',
+			reply_to: 'file.transfer1211@gmail.com',
+			to_email: email,
+			message_html: 'Peer ID of connector is:  ' + my_id
+			};
+
+			emailjs.send(service_id,template_id,template_params);
+			document.getElementById('successMsg').hidden = false;	
+		}
+	}

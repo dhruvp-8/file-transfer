@@ -8,11 +8,18 @@
         <link rel="stylesheet" href="./css/bootstrap.css">
         <link rel="stylesheet" href="./css/main.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+        <script type="text/javascript">
+            (function(){
+                emailjs.init("user_HkMWGfpYmjqmnMglcaoSU");
+            })();
+        </script>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
     <script src="./js/peer.js"></script>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/concate.js"></script>
-
+    <script src="./js/bootstrap.min.js"></script>
     <body>
         <div class="container">
             <h2 class="text-center">P2P File Transfer</h2>
@@ -36,7 +43,8 @@
                 <input type="file" id="myFile" class="form-control" multiple>
                 </div>
                 <div class="col-md-6">
-                    <button type="button" id="send" onclick="SendMsg();" class="btn btn-md btn-success">Send</button><br>
+                    <button type="button" id="send" onclick="SendMsg();" class="btn btn-md btn-success">Send</button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Email Peer ID</button><br>
                 </div><br><br><br>
                 <div id="progress1"></div><br>
                 <div id="myLoader" hidden="true">
@@ -48,6 +56,28 @@
             </div>
 
             </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Send Peer ID</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" id="errorMsg" hidden>Please Enter a valid Email Address!</div>
+                <div class="alert alert-success" id="successMsg" hidden>Email Sent Successfully!</div>
+                <label><strong>Enter Recipient ID:</strong></label>
+                <input type="text" class="form-control" id="email"><br>
+                <button class="btn btn-md btn-warning" onclick="SendEmail();">Send Email</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Ok Got it!</button>
+            </div>
+            </div>
+        </div>
         </div>
 
         <div id="error-page" hidden>
