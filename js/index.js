@@ -1,8 +1,13 @@
 var peer = new Peer({
 	key: 'saxv2cjyzuz69a4i',
 	 config: {'iceServers': [
-    { url: 'stun:stun.l.google.com:19302' }
-	 ]}
+    	{url:'stun:stun01.sipphone.com'},
+		{
+    		url: 'turn:numb.viagenie.ca',
+    		credential: 'muazkh',
+    		username: 'webrtc@live.com'
+		}
+	]}
 });
 
 var my_id;
