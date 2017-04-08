@@ -1,13 +1,5 @@
 var peer = new Peer({
-	key: 'saxv2cjyzuz69a4i',
-	config: {'iceServers': [
-    { url: 'stun:stun4.l.google.com:19302' },
-	{
-		url: 'turn:192.158.29.39:3478?transport=tcp',
-		credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-		username: '28224511:1379330808'
-	}
-	]}
+	key: 'saxv2cjyzuz69a4i'
 });
 
 var my_id;
