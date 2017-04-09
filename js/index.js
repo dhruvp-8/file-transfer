@@ -13,8 +13,8 @@ var peer = new Peer({
 var my_id;
 //console.log(navigator.userAgent);
 var conn;
-var other_id;
-
+var other_id = [];
+var connections = [];
 function myError(msg){
 	$('#myError').show('fadein');
 	document.getElementById('myError').innerHTML = msg;
@@ -28,8 +28,8 @@ function myError(msg){
 if(util.supports.data){
 	peer.on('open', function(id) {
 		my_id = id;
-	//console.log('My peer ID is: ' + id);
-	document.getElementById('url-link').value = id;
+		//console.log('My peer ID is: ' + id);
+		document.getElementById('url-link').value = id;
 	});
 
 
@@ -53,7 +53,18 @@ else{
 
 function myDisconnection(con){
 	document.getElementById('send').disabled = true;
-	document.getElementById('cur-conn').innerHTML = '<i>No Connected Users.</i>';
+	$('#cur-conn').empty();
+	var sk = other_id.indexOf(con.peer);
+	if(sk > -1){
+		other_id.splice(sk , 1);
+	}
+	for(var i=0;i<other_id.length;i++){
+		$('#cur-conn').append('<strong>Connected to : </strong>' + other_id[i] + '<br>');
+	}
+	if(other_id.length === 0){
+		$('#cur-conn').empty();
+		$('#cur-conn').append('<i>No Connected Users.</i>');
+	}
 	document.getElementById('r-url-d').value = '';
 	myError('Disconnected with: <strong>' + con.peer + '</strong>');
 }
@@ -85,7 +96,7 @@ function SendMsg(){
 					document.getElementById('progress1').innerHTML = '<div class="progress"><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:'+ yy +'%"></div></div><span><h3><strong>'+ yy +'% completed at a speed of 1Mbps!</strong></h3></span>';
 					//console.log("sending: " + (offset / fileSize) * 100 + "%");
 					if (offset >= fileSize) {
-						conn.send(evt.target.result); ///final chunk
+						broadcastMessage(evt.target.result); ///final chunk
 						//conn.send('Done!');
 						//console.log("Done reading file " + name + " " + mime);
 						count++;
@@ -93,7 +104,7 @@ function SendMsg(){
 					}
 					else {
 						//console.log(evt.target.result);                    
-						conn.send(evt.target.result);
+						broadcastMessage(evt.target.result);
 						count++;
 					}               
 				} else {
@@ -106,7 +117,7 @@ function SendMsg(){
 		}
 
 		readchunk(Math.ceil(fileSize/chunkSize));
-		conn.send({name:name, type:mime, size: file.size});
+		broadcastMessage({name:name, type:mime, size: file.size});
 	}
 	
 function Connect(){
@@ -121,13 +132,17 @@ function Connect(){
 			c.destroy();
 		});
 
-		c.on('error', function(err){ alert(err) });
+		c.on('error', function(err){ alert(err); });
 		//console.log(other_id);
 	}
-
+	
 	function myConnection(con){
 		conn = con;
-		document.getElementById('cur-conn').innerHTML = '<strong>Connected to : </strong>' + conn.peer;
+		other_id.push(conn.peer);
+		$('#cur-conn').empty();
+		for(var i=0;i<other_id.length;i++){
+			$('#cur-conn').append('<strong>Connected to : </strong>' + other_id[i] + '<br>');
+		}
 		document.getElementById('send').disabled = false;
 		$('#mySuccess').show('fadein');
 		document.getElementById('mySuccess').innerHTML = '<strong>Connected to : </strong>' + conn.peer;
@@ -135,6 +150,8 @@ function Connect(){
 			$('#mySuccess').hide('fadeout');
 		},5000);
 		
+		connections.push(conn);
+
 		conn.on('data', function(data){
 			document.getElementById('dwld-link').innerHTML = '';
 			document.getElementById('info').innerHTML = '';
@@ -187,6 +204,12 @@ function Connect(){
 		});
 
 	}
+
+	function broadcastMessage(message){
+    for(var i=0;i<connections.length;i++){
+        connections[i].send(message);
+    }
+}
 
 /*var m = 0;
 var mybb = [];	
