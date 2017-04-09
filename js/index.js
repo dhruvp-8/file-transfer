@@ -52,7 +52,6 @@ else{
 }
 
 function myDisconnection(con){
-	document.getElementById('send').disabled = true;
 	$('#cur-conn').empty();
 	var sk = other_id.indexOf(con.peer);
 	if(sk > -1){
@@ -63,6 +62,7 @@ function myDisconnection(con){
 	}
 	if(other_id.length === 0){
 		$('#cur-conn').empty();
+		document.getElementById('send').disabled = true;
 		$('#cur-conn').append('<i>No Connected Users.</i>');
 	}
 	document.getElementById('r-url-d').value = '';
