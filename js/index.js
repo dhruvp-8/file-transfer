@@ -49,6 +49,7 @@ if(util.supports.data){
 else{	
 	document.getElementById('test').hidden = true;
 	document.getElementById('error-page').hidden = false;
+	$('body').css("background-color","#eee");
 }
 
 function myDisconnection(con){
