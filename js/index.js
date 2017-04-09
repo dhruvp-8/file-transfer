@@ -15,6 +15,15 @@ var my_id;
 var conn;
 var other_id;
 
+function myError(msg){
+	$('#myError').show('fadein');
+	document.getElementById('myError').innerHTML = msg;
+	setTimeout(function(){
+
+		$('#myError').hide('fadeout');
+	},5000);
+}
+
 
 if(util.supports.data){
 	peer.on('open', function(id) {
@@ -34,7 +43,7 @@ if(util.supports.data){
 	var total;
 	var finalBlobs =[];
 	var myBl = [];
-	
+	peer.on('disconnected', myDisconnection);
 	var count = 0;
 }
 else{	
@@ -42,10 +51,17 @@ else{
 	document.getElementById('error-page').hidden = false;
 }
 
+function myDisconnection(con){
+	document.getElementById('send').disabled = true;
+	document.getElementById('cur-conn').innerHTML = '<i>No Connected Users.</i>';
+	document.getElementById('r-url-d').value = '';
+	myError('Disconnected with: <strong>' + con.peer + '</strong>');
+}
+
 function SendMsg(){
 		var files = document.getElementById('myFile').files;
 		if (!files.length) {
-		alert('Please select a file!');
+		myError('Please select a file!');
 		return;
 		}
 		var file = files[0];
@@ -100,13 +116,25 @@ function Connect(){
 			myConnection(c);
 		});
 
+		c.on('close', function(){
+			myDisconnection(c);
+			c.destroy();
+		});
+
 		c.on('error', function(err){ alert(err) });
 		//console.log(other_id);
 	}
 
 	function myConnection(con){
 		conn = con;
-		$('#cur-conn').append('<strong>Connected to : </strong>' + conn.peer);
+		document.getElementById('cur-conn').innerHTML = '<strong>Connected to : </strong>' + conn.peer;
+		document.getElementById('send').disabled = false;
+		$('#mySuccess').show('fadein');
+		document.getElementById('mySuccess').innerHTML = '<strong>Connected to : </strong>' + conn.peer;
+		setTimeout(function(){
+			$('#mySuccess').hide('fadeout');
+		},5000);
+		
 		conn.on('data', function(data){
 			document.getElementById('dwld-link').innerHTML = '';
 			document.getElementById('info').innerHTML = '';

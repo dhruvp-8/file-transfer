@@ -1,3 +1,4 @@
+
 .loader,
 .loader:after {
   border-radius: 50%;
@@ -38,6 +39,36 @@ border-top: 0.7em solid rgba(0, 0, 0 , 0.2);
 }
 
 .github{
+  
+  opacity: 0.3;
+}
+
+.github:hover{
+  opacity: 0.8;
+}
+
+.webrtc{
+
+  opacity: 0.3;
+}
+
+.webrtc:hover{
+  opacity: 0.8;
+}
+
+.peer{
+
+  width: 40px;
+  height: 40px;
+  opacity: 0.3;
+}
+
+.peer:hover{
+  opacity: 0.8;
+}
+
+
+/*.github{
   position: absolute;
   left: 33%; 
   bottom: 10%;
@@ -75,9 +106,9 @@ border-top: 0.7em solid rgba(0, 0, 0 , 0.2);
 
 .peer:hover{
   opacity: 0.8;
-}
+}*/
 
-@media only screen and (max-width: 950px ){
+/*@media only screen and (max-width: 950px ){
     .github{
       position: absolute;
       left: 28%;
@@ -93,3 +124,39 @@ border-top: 0.7em solid rgba(0, 0, 0 , 0.2);
       width: auto;
     }
 }
+
+
+@media only screen and (max-width: 300px ){
+    .github{
+      position: absolute;
+      left: 50%;
+    }
+    .copyright{
+      position: absolute;
+      left: 25%;
+      bottom: 1%;
+    }
+    .webrtc{
+      display: none;
+    }
+    .peer{
+      display: none;
+    }
+}
+
+@media only screen and (max-width: 215px ){
+    .github{
+      position: absolute;
+      left: 50%;
+      bottom: 0%;
+    }
+    .copyright{
+      display: none;
+    }
+    .webrtc{
+      display: none;
+    }
+    .peer{
+      display: none;
+    }
+}*/

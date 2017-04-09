@@ -7,14 +7,14 @@
         <title>P2P File Transfer</title>
         <link rel="stylesheet" href="./css/bootstrap.css">
         <link rel="stylesheet" href="./css/main.css">
+        <link rel="stylesheet" href="./css/animate.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+        <script type="text/javascript" src="./js/email.min.js"></script>
         <script type="text/javascript">
             (function(){
                 emailjs.init("user_HkMWGfpYmjqmnMglcaoSU");
             })();
         </script>
-        <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
     <script src="./js/peer.js"></script>
     <script src="./js/jquery.min.js"></script>
@@ -27,35 +27,55 @@
         </div>
         <div id="test">
             <div class="container">
-                <div class="col-md-6">
-                    <label>Your ID:</label>
-                    <input type="text" id="url-link" class="form-control" readonly><br>
-                </div>
-                <div class="col-md-6">
-                    <label for="">Receiver's ID</label>
-                    <input type="text" id="r-url-d" class="form-control"><br>
-                </div>
+                <div id="myError" class="alert alert-danger" hidden></div>
+                <div id="mySuccess" class="alert alert-success" hidden></div>
+                <div class="col-md-8 animated fadeIn">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label><strong>Your ID:</strong></label>
+                            <input type="text" id="url-link" class="form-control" readonly><br>
+                        </div>
+                        <div class="col-md-6">
+                            <label for=""><strong>Receiver's ID:</strong></label>
+                            <input type="text" id="r-url-d" class="form-control"><br>
+                        </div>
+                    </div>
 
-                <button type="button" id="connect" onclick="Connect();" class="btn btn-block btn-md btn-primary">Connect</button><br>
-                <label id="cur-conn"></label><br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" id="connect" onclick="Connect();" class="btn btn-block btn-md btn-primary">Connect</button><br>
+                        </div>
+                    </div>
 
-                <div class="col-md-6">
-                <input type="file" id="myFile" class="form-control" multiple>
-                </div>
-                <div class="col-md-6">
-                    <button type="button" id="send" onclick="SendMsg();" class="btn btn-md btn-success">Send</button>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Email Peer ID</button><br>
-                </div><br><br><br>
-                <div id="progress1"></div><br>
-                <div id="myLoader" hidden="true">
-                    <div class="loader"></div>&nbsp;<span><h4><strong>Please Wait Until your file is being received from host...</strong></h4></span><br>
-                </div>
-                <div id="info"></div>
-                <br><br>
-                <div id="dwld-link"></div>
-                <!--<div id="audio-listen"></div>-->
-            </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="file" id="myFile" class="form-control" multiple>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" id="send" onclick="SendMsg();" class="btn btn-md btn-success" disabled>Send</button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Email Peer ID</button><br>
+                        </div>
+                    </div><br><br>
 
+                    <div id="progress1"></div><br>
+
+                    <div id="myLoader" hidden="true">
+                        <div class="loader"></div>&nbsp;<span><h4><strong>Please Wait Until your file is being received from host...</strong></h4></span><br>
+                    </div>
+                    <div id="info"></div>
+                    <br>
+                    <div id="dwld-link"></div>
+                    <br><br>
+                    <!--<div id="audio-listen"></div>-->
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default animated slideInDown">
+                        <div class="panel-heading text-center"><strong>Connected User</strong></div>
+                        <div class="panel-body">
+                            <div id="cur-conn"><i>No Connected Users.</i></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -89,10 +109,18 @@
             </div>
         </div>
         <footer>
+            <div class="container">
+            <div class="col-md-4 col-xs-4">
             <a href="https://github.com/dhruvp-8/file-transfer" target="_blank"><img src="./images/github.svg" class="github"></a>
             <a href="http://peerjs.com" target="_blank"><img src="./images/peerjs.png" class="peer"></a>
+            </div>
+            <div class="col-md-4 col-xs-4">
             <h6 class="copyright"><strong>Copyright &copy; 2017 P2P File Transfer.</strong></h6>
+            </div>
+            <div class="col-md-4 col-xs-4">
             <a href="https://webrtc.org" target="_blank"><img src="./images/webrtc.png" class="webrtc"></a>
+            </div>
+            </div>
         </footer>
         <script src="./js/index.js" charset="utf-8"></script>
     </body>
