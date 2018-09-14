@@ -32,7 +32,7 @@ if(util.supports.data){
 		document.getElementById('url-link').value = id;
 	});
 
-
+	console.log("hello")
 	peer.on('connection', myConnection);
 	var myType = [];
 	var myData = [];
