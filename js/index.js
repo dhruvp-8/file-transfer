@@ -1,14 +1,15 @@
-var peer = new Peer({
-	key: 'saxv2cjyzuz69a4i',
-	 config: {'iceServers': [
-    	{url:'stun:23.21.150.121'},
-		{
-			url: 'turn:192.158.29.39:3478?transport=tcp',
-			credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-			username: '28224511:1379330808'
-		}
-	]}
+const uuid = +new Date();
+console.log(uuid);
+
+var peer = new Peer(uuid, {
+	host: '',
+	port: 9000,
+	path: '/myapp',
+	config: {
+		iceServers: [],
+	}
 });
+console.log(peer);
 
 var my_id;
 //console.log(navigator.userAgent);
@@ -25,32 +26,25 @@ function myError(msg){
 }
 
 
-if(util.supports.data){
-	peer.on('open', function(id) {
-		my_id = id;
-		//console.log('My peer ID is: ' + id);
-		document.getElementById('url-link').value = id;
-	});
+peer.on('open', function(id) {
+	my_id = id;
+	//console.log('My peer ID is: ' + id);
+	document.getElementById('url-link').value = id;
+});
 
-	console.log("hello")
-	peer.on('connection', myConnection);
-	var myType = [];
-	var myData = [];
-	var it = 0;
-	var sz;
-	var ty;
-	var nm;
-	var total;
-	var finalBlobs =[];
-	var myBl = [];
-	peer.on('disconnected', myDisconnection);
-	var count = 0;
-}
-else{	
-	document.getElementById('test').hidden = true;
-	document.getElementById('error-page').hidden = false;
-	$('body').css("background-color","#eee");
-}
+console.log("hello")
+peer.on('connection', myConnection);
+var myType = [];
+var myData = [];
+var it = 0;
+var sz;
+var ty;
+var nm;
+var total;
+var finalBlobs =[];
+var myBl = [];
+peer.on('disconnected', myDisconnection);
+var count = 0;
 
 function myDisconnection(con){
 	$('#cur-conn').empty();
@@ -244,25 +238,3 @@ function myConnection(con){
 		});
 
 }*/
-
-	function SendEmail(){
-		var email = document.getElementById('email').value;
-		if(!email){
-			document.getElementById('errorMsg').hidden = false;
-			document.getElementById('successMsg').hidden = true;
-		}
-		else{
-			document.getElementById('errorMsg').hidden = true;
-			var service_id = 'gmail';
-			var template_id = 'template_zS6xa2Hp';
-			var template_params = {
-			from_name: 'File Transfer',
-			reply_to: 'file.transfer1211@gmail.com',
-			to_email: email,
-			message_html: 'Peer ID of connector is:  ' + my_id
-			};
-
-			emailjs.send(service_id,template_id,template_params);
-			document.getElementById('successMsg').hidden = false;	
-		}
-	}
